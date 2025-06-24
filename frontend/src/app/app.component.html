@@ -1,0 +1,149 @@
+<!-- src/app/app.component.html -->
+<div class="min-h-screen bg-gray-100 font-inter text-gray-800 antialiased">
+  <nav
+    class="bg-gradient-to-r from-blue-700 to-indigo-800 text-white p-4 shadow-xl z-10 relative"
+  >
+    <div
+      class="container mx-auto flex flex-col sm:flex-row justify-between items-center"
+    >
+      <a
+        routerLink="/"
+        class="text-3xl font-extrabold tracking-tight rounded-lg hover:bg-white hover:text-blue-700 p-2 transition duration-300 ease-in-out"
+      >
+        SumaAuth
+      </a>
+      <div
+        class="mt-4 sm:mt-0 flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-6"
+      >
+        <ng-container
+          *ngIf="authService.currentUser | async as user; else loggedOut"
+        >
+          <span class="text-lg font-medium capitalize flex items-center">
+            <span class="font-semibold text-blue-200">{{
+              user.fullName || "User"
+            }}</span>
+            (<span class="capitalize ml-1 text-indigo-200">{{ user.role }}</span
+            >)
+          </span>
+          <a
+            routerLink="/dashboard"
+            routerLinkActive="active-nav-link"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="nav-link flex items-center"
+          >
+            <svg
+              class="h-5 w-5 mr-1"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+            Dashboard
+          </a>
+          <a
+            *ngIf="user.role === 'admin'"
+            routerLink="/dashboard/admin"
+            routerLinkActive="active-nav-link"
+            class="nav-link flex items-center"
+          >
+            <svg
+              class="h-5 w-5 mr-1"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+            Admin
+          </a>
+          <a
+            *ngIf="user.role === 'admin' || user.role === 'editor'"
+            routerLink="/dashboard/editor"
+            routerLinkActive="active-nav-link"
+            class="nav-link flex items-center"
+          >
+            <svg
+              class="h-5 w-5 mr-1"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M17 3a2.85 2.85 0 1 1 2 2L7 19l-4 1 1-4Z" />
+              <path d="m15 5 4 4" />
+            </svg>
+            Editor
+          </a>
+          <button
+            (click)="authService.logout()"
+            class="ml-0 sm:ml-4 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-5 rounded-xl shadow-lg transform transition duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 flex items-center"
+          >
+            <svg
+              class="h-5 w-5 mr-2"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            Logout
+          </button>
+        </ng-container>
+        <ng-template #loggedOut>
+          <a routerLink="/auth" class="nav-link flex items-center">
+            <svg
+              class="h-5 w-5 mr-1"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+              <polyline points="10 17 15 12 10 7" />
+              <line x1="15" y1="12" x2="3" y2="12" />
+            </svg>
+            Login / Register
+          </a>
+        </ng-template>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto p-6 md:p-8">
+    <router-outlet></router-outlet>
+  </main>
+</div>

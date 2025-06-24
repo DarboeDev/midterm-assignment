@@ -1,0 +1,30 @@
+<div class="min-h-screen bg-gray-100 p-4 font-inter">
+  <header
+    class="flex flex-col sm:flex-row justify-between items-center bg-white p-6 md:p-8 rounded-3xl shadow-xl mb-6 max-w-7xl mx-auto w-full"
+  >
+    <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800 mb-4 sm:mb-0">
+      Welcome,
+      <span class="text-blue-700">{{ currentUser?.fullName || "User" }}</span
+      >!
+    </h1>
+    <div
+      class="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-6"
+    >
+      <span
+        class="text-lg font-medium text-blue-600 capitalize py-2 px-4 rounded-full bg-blue-50 border border-blue-200"
+      >
+        Role: <span class="font-semibold">{{ currentUser?.role }}</span>
+      </span>
+    </div>
+  </header>
+  <main class="container mx-auto max-w-7xl">
+    <h2
+      class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 border-b-2 border-blue-300 pb-2"
+    >
+      Your Dashboard
+    </h2>
+
+    <!-- Conditional Rendering based on Role -->
+    <router-outlet></router-outlet>
+  </main>
+</div>
