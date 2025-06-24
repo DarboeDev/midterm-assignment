@@ -94,8 +94,7 @@ backend/
 
 </details>
 
-<details>
-<summary><strong>Frontend (Angular)</strong></summary>
+### Frontend Structure
 
 ```
 frontend/src/app/
